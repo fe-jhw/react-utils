@@ -7,8 +7,10 @@
   "author": "fe-jhw",
   "license": "MIT",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",

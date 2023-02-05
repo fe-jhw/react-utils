@@ -1,9 +1,9 @@
+import LoginForm from './components/forms/LoginForm'
+
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>정현우의 React Boilerplate</p>
-      </header>
+      <LoginForm />
     </div>
   )
 }
