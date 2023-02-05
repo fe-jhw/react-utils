@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { css } from '@emotion/react'
+import DynamicForm from './DynamicForm'
 
 interface LoginFormInput {
   id: string
@@ -38,7 +39,7 @@ const LoginForm = () => {
         type="password"
       />
       {errors['password'] && <p role="alert">{errors['password'].message}</p>}
-
+      <DynamicForm />
       <input type="submit" value="로그인" />
     </form>
   )
