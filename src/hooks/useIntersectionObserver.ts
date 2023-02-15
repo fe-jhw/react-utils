@@ -24,7 +24,7 @@ export const useIntersectionObserverRef = <T extends HTMLElement>({
   const elementRef = useRef<T>(null)
 
   useEffect(() => {
-    if (!elementRef.current || !observerRef.current) {
+    if (type === 'callback' || !elementRef.current || !observerRef.current) {
       return
     }
     observerRef.current.observe(elementRef.current)
