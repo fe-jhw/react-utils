@@ -1,56 +1,56 @@
-const path = require("path")
-const webpack = require("webpack")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
-const childProcess = require("child_process")
+const childProcess = require('child_process')
 
 module.exports = {
-  entry: ["./src/index.tsx"],
+  entry: ['./src/index.tsx'],
   module: {
     rules: [
       {
         test: /\.(js|mjs|jsx|ts|tsx)$/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: {
-          configFile: path.resolve(__dirname, "../babel/babel.config.js"),
+          configFile: path.resolve(__dirname, '../babel/babel.config.js'),
         },
       },
       {
         test: /\.(ico|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader",
+        loader: 'file-loader',
         options: {
-          name: "[name].[ext]",
+          name: '[name].[ext]',
         },
       },
       {
         test: /\.png$/,
-        loader: "url-loader",
+        loader: 'url-loader',
         options: {
-          publicPath: "./dist/",
-          name: "[name].[ext]?[hash]",
+          publicPath: './dist/',
+          name: '[name].[ext]?[hash]',
           limit: 5000,
         },
       },
     ],
   },
 
-  infrastructureLogging: { level: "error" },
+  infrastructureLogging: { level: 'error' },
 
-  stats: "minimal",
+  stats: 'minimal',
 
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
-      "@src": path.resolve(__dirname, "src/"),
+      '@': path.resolve(__dirname, '../../src'),
     },
   },
 
   plugins: [
     // new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: "public/index.html",
+      filename: 'index.html',
+      template: 'public/index.html',
     }),
     new ForkTsCheckerWebpackPlugin(),
     // new webpack.BannerPlugin({
@@ -63,5 +63,5 @@ module.exports = {
     // }),
   ],
 
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
 }
