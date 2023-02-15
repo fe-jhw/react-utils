@@ -14,13 +14,14 @@ export const useIntersectionObserverRef = <T extends HTMLElement>({
   type = 'ref',
 }: UseIntersectionObserverProps) => {
   const observerRef = useRef<IntersectionObserver>(new IntersectionObserver(callback, options))
-  // if (type === 'callback') {
-  //   const callbackRef = (elementRef: Ref<T>) => {
-  //     if (elementRef && observerRef.current) {
-  //       observerRef.current.observe(elementRef)
-  //     }
-  //   }
-  // }
+  if (type === 'callback') {
+    const callbackRef = (element: T) => {
+      if (element && observerRef.current) {
+        observerRef.current.observe(element)
+      }
+    }
+    return callbackRef
+  }
   const elementRef = useRef<T>(null)
   useEffect(() => {
     if (!elementRef.current || !observerRef.current) {
