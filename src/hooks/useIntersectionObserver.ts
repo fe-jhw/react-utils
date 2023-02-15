@@ -1,28 +1,28 @@
-import { Ref, useEffect, useRef } from 'react'
+import { Ref, RefCallback, RefObject, useEffect, useRef } from 'react'
 
-interface UseIntersectionObserverProps {
+interface UseIntersectionObserverRefProps {
   readonly callback: IntersectionObserverCallback
   readonly options?: IntersectionObserverInit
   readonly type?: 'callback' | 'ref'
 }
 
-// TODO: ref 콜백형태로 관리(같은 형태 dom 배열 타겟) 추가
+// TODO: 얘를 이용해서 무한 스크롤 구현하기
+// TODO: 그후에 블로그 포스트
 
 export const useIntersectionObserverRef = <T extends HTMLElement>({
   callback,
-  options = { root: null, rootMargin: '0px', threshold: 1 },
+  options = { root: null, rootMargin: '0px', threshold: 0 },
   type = 'ref',
-}: UseIntersectionObserverProps) => {
-  const observerRef = useRef<IntersectionObserver>(new IntersectionObserver(callback, options))
-  if (type === 'callback') {
-    const callbackRef = (element: T) => {
-      if (element && observerRef.current) {
-        observerRef.current.observe(element)
-      }
+}: UseIntersectionObserverRefProps): RefCallback<T> | RefObject<T> => {
+  const callbackOnlyIntersecting: IntersectionObserverCallback = (entries, observer) => {
+    const isIntersecting = entries.map(entry => entry.isIntersecting).reduce((acc, cur) => acc && cur, true)
+    if (isIntersecting) {
+      callback(entries, observer)
     }
-    return callbackRef
   }
+  const observerRef = useRef<IntersectionObserver>(new IntersectionObserver(callbackOnlyIntersecting, options))
   const elementRef = useRef<T>(null)
+
   useEffect(() => {
     if (!elementRef.current || !observerRef.current) {
       return
@@ -30,6 +30,15 @@ export const useIntersectionObserverRef = <T extends HTMLElement>({
     observerRef.current.observe(elementRef.current)
     return () => observerRef.current.disconnect()
   }, [elementRef, observerRef])
+
+  if (type === 'callback') {
+    const refCallback = (element: T) => {
+      if (element && observerRef.current) {
+        observerRef.current.observe(element)
+      }
+    }
+    return refCallback
+  }
 
   return elementRef
 }
