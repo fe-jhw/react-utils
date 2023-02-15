@@ -22,8 +22,8 @@
 
 커스텀 훅
 
-- useIntersectionObserverRef : IntersectionObserver 사용
+- useIntersectionObserverRef : IntersectionObserver 사용하는 Ref 리턴
 
 ## TODO
 
-- useIntersectionObserver 훅
+- useIntersectionObserverRef 콜백 타입
