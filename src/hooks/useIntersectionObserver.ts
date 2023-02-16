@@ -6,9 +6,6 @@ interface UseIntersectionObserverRefProps {
   readonly type?: 'callback' | 'ref'
 }
 
-// TODO: 얘를 이용해서 무한 스크롤 구현하기
-// TODO: 그후에 블로그 포스트
-
 export const useIntersectionObserverRef = <T extends HTMLElement>({
   callback,
   options = { root: null, rootMargin: '0px', threshold: 0 },
