@@ -23,5 +23,9 @@
 커스텀 훅
 
 - useIntersectionObserverRef : IntersectionObserver 사용하는 RefObject or RefCallback 리턴
+- useToggle: 토글 추상화
+- useInterval: 리액트 내에서 setInterval
+- useDebounce: 디바운스
 
 ## TODO
+- 롤업으로 라이브러리로 말기
