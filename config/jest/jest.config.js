@@ -25,11 +25,12 @@
 // TS 테스팅
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  preset: "ts-jest",
-  rootDir: "../..",
-  testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/config/jest/setupTests.js"],
+  preset: 'ts-jest',
+  rootDir: '../..',
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/config/jest/setupTests.js'],
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": "ts-jest",
+    '^.+\\.(js|jsx|ts|tsx)$': 'ts-jest',
   },
+  moduleNameMapper: { '@/(.*)$': '<rootDir>/src/$1' },
 }
