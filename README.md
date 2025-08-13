@@ -15,6 +15,7 @@
 - useToggle: 토글 추상화
 - useInterval: 리액트 내에서 setInterval
 - useDebounce: 디바운스
+- useArrayState: 배열 상태관리
 
 ## utils
 
