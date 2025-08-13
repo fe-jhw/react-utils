@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 interface UseInterval {
-  (callback: () => void, interval: number): void
+  (callback: () => void, interval: number | null): void
 }
 
 export const useInterval: UseInterval = (callback, interval) => {
@@ -12,6 +12,8 @@ export const useInterval: UseInterval = (callback, interval) => {
   })
 
   useEffect(() => {
+    if (interval === null) return
+
     function tick() {
       if (savedCallback.current) {
         savedCallback.current()
